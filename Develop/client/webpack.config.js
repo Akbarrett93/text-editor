@@ -8,14 +8,14 @@ const { InjectManifest } = require('workbox-webpack-plugin');
 
 module.exports = () => {
   return {
-    mode: 'development',
+    mode: "development",
     entry: {
-      main: './src/js/index.js',
-      install: './src/js/install.js'
+      main: "./src/js/index.js",
+      install: "./src/js/install.js",
     },
     output: {
-      filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist'),
+      filename: "[name].bundle.js",
+      path: path.resolve(__dirname, "dist"),
     },
     plugins: [
       new HtmlWebpackPlugin({
@@ -24,7 +24,7 @@ module.exports = () => {
       }),
       new InjectManifest({
         swSrc: "./src-sw.js",
-        swDest: "./src-sw.js"
+        swDest: "./src-sw.js",
       }),
       new WebpackPwaManifest({
         fingerprints: false,
@@ -39,17 +39,18 @@ module.exports = () => {
         icons: [
           {
             src: path.resolve("src/images/logo.png"),
-            destination: path.join("assets", "icons")
-          }
-        ]
-      })
+            sizes: [96, 128, 192, 256, 384, 512],
+            destination: path.join("assets", "icons"),
+          },
+        ],
+      }),
     ],
 
     module: {
       rules: [
         {
           test: /\.css$/i,
-          use: ["style-loader", "css-loader"]
+          use: ["style-loader", "css-loader"],
         },
         {
           test: /\.m?js$/,
@@ -60,11 +61,11 @@ module.exports = () => {
               presets: ["@babel-present-env"],
               plugins: [
                 "@babel/plugin-proposal-object-reset-spread",
-                "@babel/transform-runtime"
-              ]
-            }
-          }
-        }
+                "@babel/transform-runtime",
+              ],
+            },
+          },
+        },
       ],
     },
   };
